@@ -68,6 +68,8 @@
         get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse
         $cac = $tmp + "\" +  "\Default\Cache\Cache_Data"
         get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse        
+        $cac = $ute + "\" + "AppData\Roaming\Google\Local Search History"
+        get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse           
        
         #cancello o Cookies e le cache di Chrome
    }
@@ -94,5 +96,5 @@ get-childitem * -path $tmp  -Force -recurse |remove-item -force -recurse
 
 #cancellazione della cache  windows\temp
 
-#non è prudente cancellare tutte le $env:temp perché numerosi utenti le usano correntemente come directory di lavoro
+#non Ã¨ prudente cancellare tutte le $env:temp perchÃ© numerosi utenti le usano correntemente come directory di lavoro
  
