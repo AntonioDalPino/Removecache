@@ -52,8 +52,8 @@
    }
 
 #cache di Google
-   
-   $ute = $si + "\users"
+   $ute = $env:HOMEDRIVE
+   $ute = $ute + "\users"
    foreach($nome in get-childitem $ute -Name) {
    $nome
    $tmp = $ute +"\"+ $nome + "\appdata\local\Google\Chrome\User Data"
@@ -69,14 +69,14 @@
         $cac = $tmp + "\" +  "\Default\Cache\Cache_Data"
         get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse        
         $cac = $ute + "\" + "AppData\Roaming\Google\Local Search History"
-        get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse           
-       
-        #cancello o Cookies e le cache di Chrome
+        get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse      
+        $cac = $tmp + "\" +  "\Default\code cache\js"   
+        get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse  
    }
 
 #cache di Edge
-   
-   $ute = $si + "\users"
+   $ute = $env:HOMEDRIVE
+   $ute = $ute + "\users"
    foreach($nome in get-childitem $ute -Name) {
    $nome
    $tmp = $ute +"\"+ $nome + "\AppData\Local\Microsoft\Edge\User Data\Default\Cache\Cache_Data"
@@ -85,10 +85,8 @@
         get-childitem * -path $cac -Force -recurse |Remove-Item -recurse -force
    $tmp = $ute +"\"+ $nome + "\AppData\Local\Microsoft\Edge\User Data\Default\Code Cache\js"
 
-        $cac = $tmp + "\" + "\*"
+        $cac = $tmp + "\*"
         get-childitem * -path $cac -Force -recurse |Remove-Item -recurse -force                
-
-        #cancello le cache di Edge
    }
 
 $tmp = $si + "\windows\temp"
