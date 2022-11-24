@@ -3,14 +3,14 @@
 
    $ute = $si + "\users"
    foreach($nome in get-childitem $ute -Name) {
-       #la variabile nome scorre ogni utente presente sul pc e si accede ale risorse di quell'utente
+       #Variable $nome flows all the users directory in your pc 
    $nome
    $tmp = $ute +"\"+ $nome + "\appdata\local\temp"
    $tmp 
 
         Get-ChildItem  * -path $tmp -Force -recurse |Remove-Item  -force -recurse
 
-    #Cancello la directory temp dell'utente per ogni utente sul pc
+    #Delete all the user temp directory
     #Get-ChildItem $tmp -Name
    }
 
@@ -26,7 +26,7 @@
         
         Get-ChildItem * -path $cac -Force -recurse |Remove-Item  -force -recurse
 
-        #cancellazione delle cache di Firefox
+        #Delete cache directory of Firefox
         #Get-ChildItem $tmp -Name
        }
    }
@@ -39,7 +39,7 @@
    $tmp = $ute +"\"+ $nome + "\appdata\Roaming\mozilla\firefox\profiles"
    foreach($prof in Get-ChildItem $tmp -Name)     
        {
-       #Togli Cookies
+       #Delete Cookies
         $cac = $tmp + "\" + $prof + "coo*"
         Get-ChildItem * -path $cac -Force -recurse |Remove-Item  -force -recurse
 
