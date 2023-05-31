@@ -68,7 +68,7 @@
         get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse
         $cac = $tmp + "\" +  "\Default\Cache\Cache_Data"
         get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse        
-        $cac = $ute + "\" + "AppData\Roaming\Google\Local Search History"
+        $cac = $ute + $nome + "\" + "AppData\Roaming\Google\Local Search History"
         get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse      
         $cac = $tmp + "\" +  "\Default\code cache\js"   
         get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse  
