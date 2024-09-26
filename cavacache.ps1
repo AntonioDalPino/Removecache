@@ -1,22 +1,22 @@
-   $si = $env:HOMEDRIVE
+  
 #Windows temp
 
-   $ute = $si + "\users"
+   $ute = $env:HOMEDRIVE
+   $ute = $ute + "\users"
    foreach($nome in get-childitem $ute -Name) {
-       #Variable $nome flows all the users directory in your pc 
    $nome
    $tmp = $ute +"\"+ $nome + "\appdata\local\temp"
    $tmp 
 
         Get-ChildItem  * -path $tmp -Force -recurse |Remove-Item  -force -recurse
 
-    #Delete all the user temp directory
+    #Cancello la directory temp dell'utente per ogni utente sul pc
     #Get-ChildItem $tmp -Name
    }
 
 #Cache di firefox
-   
-   $ute = $si + "\users"
+   $ute = $env:HOMEDRIVE
+   $ute = $ute + "\users"
    foreach($nome in get-childitem $ute -Name) {
    $nome
    $tmp = $ute +"\"+ $nome + "\appdata\local\mozilla\firefox\profiles"
@@ -26,26 +26,24 @@
         
         Get-ChildItem * -path $cac -Force -recurse |Remove-Item  -force -recurse
 
-        #Delete cache directory of Firefox
         #Get-ChildItem $tmp -Name
        }
    }
 
 #Cookies di Firefox
-   
-   $ute = $si + "\users"
+   $ute = $env:HOMEDRIVE
+   $ute = $ute + "\users"
    foreach($nome in get-childitem $ute -Name) {
    $nome
    $tmp = $ute +"\"+ $nome + "\appdata\Roaming\mozilla\firefox\profiles"
    foreach($prof in Get-ChildItem $tmp -Name)     
        {
-       #Delete Cookies
+       #Togli Cookies
         $cac = $tmp + "\" + $prof + "coo*"
         Get-ChildItem * -path $cac -Force -recurse |Remove-Item  -force -recurse
 
         $cac = $tmp + "\" + $prof + "*js"
         Get-ChildItem * -path $cac -Force -recurse |Remove-Item  -force -recurse
-
 
         #Get-ChildItem $tmp -Name
        }
@@ -68,11 +66,20 @@
         get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse
         $cac = $tmp + "\" +  "\Default\Cache\Cache_Data"
         get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse        
-        $cac = $ute + $nome + "\" + "AppData\Roaming\Google\Local Search History"
+        $cac = $ute +"\"+ $nome + "\" + "AppData\Roaming\Google\Local Search History"
         get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse      
         $cac = $tmp + "\" +  "\Default\code cache\js"   
-        get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse  
-   }
+        get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse 
+        $tmp = $ute +"\"+ $nome + "\appdata\local\Google"
+        $cac = $tmp + "\appdata\local\Google" + "\" + "GoogleUpdater" 
+        get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse 
+        $cac = $tmp + "\appdata\local\Google\Chrome\User Data\Default" + "\" + "login data" 
+        get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse 
+        $cac = $tmp + "\appdata\local\Google\Chrome\User Data\Default" + "\" + "login data-journal" 
+        get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse 
+        
+  }
+
 
 #cache di Edge
    $ute = $env:HOMEDRIVE
@@ -83,14 +90,43 @@
 
         $cac = $tmp + "\" + "\*"
         get-childitem * -path $cac -Force -recurse |Remove-Item -recurse -force
-   $tmp = $ute +"\"+ $nome + "\AppData\Local\Microsoft\Edge\User Data\Default\Code Cache\js"
-
-        $cac = $tmp + "\*"
-        get-childitem * -path $cac -Force -recurse |Remove-Item -recurse -force                
+        $tmp = $ute +"\"+ $nome + "\AppData\Local\Microsoft\Edge\User Data\Default\Code Cache\js"
+        $cac = $tmp + "\" + "\*"
+        get-childitem * -path $cac -Force -recurse |Remove-Item -recurse -force    
+        $cac = $tmp + "\appdata\local\Microsoft\Edge\User Data\Default" + "\" + "login data" 
+        get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse 
+        $cac = $tmp + "\appdata\local\Microsoft\Edge\User Data\Default" + "\" + "login data-journal" 
+        get-childitem *  -path $cac -Force -recurse |Remove-Item -force -recurse             
    }
 
-$tmp = $si + "\windows\temp"
+#Togli cache java
+
+   $ute = $env:HOMEDRIVE
+   $ute = $ute + "\users"
+   foreach($nome in get-childitem $ute -Name) {
+   $nome
+   $dire = $ute +"\"+ $nome + "\AppData\LocalLow\Sun\Java\Deployment\cache\"
+
+   foreach($verj in get-childitem $dire) {
+         $dirh = $dire + "\"+ $verj
+         $caj = Get-ChildItem $dirh   -Name 
+         foreach($fj in get-childitem $caj){
+             $tj = $dirh + "\" + $tj
+             Get-ChildItem  * -path $dire -Force -recurse |Remove-Item  -force -recurse
+         }
+       }
+       
+
+    #Cancello la directory Java dell'utente per ogni utente sul pc
+    #Get-ChildItem $tmp -Name
+    
+   }
+
+
+$tmp = $env:homedrive + "\windows\temp"
 get-childitem * -path $tmp  -Force -recurse |remove-item -force -recurse
+
+
 
 #cancellazione della cache  windows\temp
 
