@@ -1,4 +1,4 @@
-﻿#Windows temp
+#Togli cache java
 
    $ute = $env:HOMEDRIVE
    $ute = $ute + "\users"
@@ -8,7 +8,7 @@
 
    foreach($verj in get-childitem $dire) {
          $dirh = $dire + "\"+ $verj
-         $caj = Get-ChildItem   -Name -attributes D  
+         $caj = Get-ChildItem $dirh   -Name 
          foreach($fj in get-childitem $caj){
              $tj = $dirh + "\" + $tj
              Get-ChildItem  * -path $dire -Force -recurse |Remove-Item  -force -recurse
@@ -20,3 +20,4 @@
     #Get-ChildItem $tmp -Name
     
    }
+
